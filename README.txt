@@ -2,15 +2,15 @@
 Increment Number Field
 ------------------------------------
 
-Version: 1.0
+Version: 1.1
 Author: Nick Dunn (nick.dunn@airlock.com)
 Build Date: 2008-12-19
-Requirements: Symphony 2.0 and Number Field extension.
+Requirements: Symphony 2.0.3 and Number Field extension.
 
 
 [INSTALLATION]
 
-1. Download and upload the 'numberfield' folder in this archive to your Symphony 'extensions' folder.
+1. Download the Number Field extension (http://github.com/pointybeard/numberfield/tree) and upload the 'numberfield' folder to your Symphony 'extensions' folder.
 
 1. Upload the 'incrementnumberfield' folder in this archive to your Symphony 'extensions' folder.
 
@@ -21,5 +21,9 @@ Requirements: Symphony 2.0 and Number Field extension.
 
 [CHANGES]
 
-1.0
+1.1 (2009-09-28)
+- Only increment when field called through Frontend. Prevents increment when using Reflection field.
+- Allow a With Selected action to reset field value to 0
+
+1.0 (2008-12-19)
 - Initial release
