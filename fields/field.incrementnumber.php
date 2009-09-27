@@ -14,9 +14,17 @@
 
 			if(!is_array($data) || empty($data)) return;
 			
-			$value = ++$data["value"];
-			$entry_id = $wrapper->getAttribute("id");
-			$this->Database->update(array("value"=>$value), "sym_entries_data_{$this->_fields['id']}", "entry_id={$entry_id}");
+			$value = (int) $data["value"];
+			
+			if ($this->_Parent->_Parent instanceof Frontend) {
+				$value = ++$value;				
+				$entry_id = $wrapper->getAttribute("id");
+				$this->Database->update(
+					array("value" => $value),
+					"tbl_entries_data_{$this->_fields['id']}",
+					"entry_id={$entry_id}"
+				);
+			}
 			
 			$increment_number = new XMLElement($this->get('element_name'), $value);
 			$wrapper->appendChild($increment_number);
@@ -33,5 +41,4 @@
 			else $wrapper->appendChild($label);
 		}
 
-		
 	}
