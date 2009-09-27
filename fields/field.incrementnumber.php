@@ -10,6 +10,19 @@
 			$this->_required = true;
 		}
 		
+		function canToggle(){
+			return true;
+		}
+		
+		function getToggleStates(){
+			return array('0' => __('Reset to 0'));
+		}
+		
+		function toggleFieldData($data, $newState){
+			$data['value'] = $newState;
+			return $data;
+		}
+		
 		function appendFormattedElement(&$wrapper, $data, $encode=false){
 
 			if(!is_array($data) || empty($data)) return;
