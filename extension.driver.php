@@ -4,21 +4,28 @@
 	
 		public function about(){
 			return array('name' => 'Field: Increment Number',
-						 'version' => '1.0',
-						 'release-date' => '2008-12-19',
-						 'author' => array('name' => 'Nick Dunn',
-										   'website' => 'http://airlock.com',
-										   'email' => 'nick.dunn@airlock.com')
+						 'version' => '1.1',
+						 'release-date' => '2011-02-08',
+						 'author' => array('name' => 'Nick Dunn')
 				 		);
 		}
 		
 		public function uninstall(){
-			$this->_Parent->Database->query("DROP TABLE `tbl_fields_incrementnumber`");
+			Symphony::Database()->query("DROP TABLE `tbl_fields_incrementnumber`");
 		}
 
 
 		public function install(){
-			return $this->_Parent->Database->query("CREATE TABLE `tbl_fields_incrementnumber` (
+			
+			if(!file_exists(EXTENSIONS . '/numberfield/fields/field.number.php')) {
+				Administration::instance()->Page->pageAlert(
+					__('Increment Number field could not be installed because the Number field needs to be installed first.'),
+					Alert::ERROR
+				);
+				return false;
+			}
+			
+			return Symphony::Database()->query("CREATE TABLE `tbl_fields_incrementnumber` (
 			  `id` int(11) unsigned NOT NULL auto_increment,
 			  `field_id` int(11) unsigned NOT NULL,
 			  PRIMARY KEY  (`id`),

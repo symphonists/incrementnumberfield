@@ -29,10 +29,10 @@
 			
 			$value = (int) $data["value"];
 			
-			if ($this->_Parent->_Parent instanceof Frontend) {
+			if (Symphony::Engine() instanceof Frontend) {
 				$value = ++$value;				
 				$entry_id = $wrapper->getAttribute("id");
-				$this->Database->update(
+				Symphony::Database()->update(
 					array("value" => $value),
 					"tbl_entries_data_{$this->_fields['id']}",
 					"entry_id={$entry_id}"
