@@ -1,6 +1,6 @@
 # Increment Number Field
 
-* Version: 1.1
+* Version: 1.2
 * Author: Nick Dunn
 * Build Date: 2011-02-07
 * Requirements: Symphony 2.2 and Number Field extension.
