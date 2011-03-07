@@ -1,8 +1,8 @@
 # Increment Number Field
 
-* Version: 1.2
+* Version: 1.2.1
 * Author: Nick Dunn
-* Build Date: 2011-02-07
+* Build Date: 2011-03-07
 * Requirements: Symphony 2.2 and Number Field extension.
 
 

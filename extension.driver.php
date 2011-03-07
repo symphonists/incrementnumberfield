@@ -4,8 +4,8 @@
 	
 		public function about(){
 			return array('name' => 'Field: Increment Number',
-						 'version' => '1.2',
-						 'release-date' => '2011-02-08',
+						 'version' => '1.2.1',
+						 'release-date' => '2011-03-07',
 						 'author' => array('name' => 'Nick Dunn')
 				 		);
 		}
