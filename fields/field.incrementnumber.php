@@ -7,33 +7,41 @@
 		function __construct(&$parent){
 			parent::__construct($parent);
 			$this->_name = 'Increment Number';
-			$this->_required = true;
+			$this->_required = TRUE;
 		}
 		
 		function canToggle(){
-			return true;
+			return TRUE;
 		}
 		
 		function getToggleStates(){
 			return array('0' => __('Reset to 0'));
 		}
 		
-		function toggleFieldData($data, $newState){
-			$data['value'] = $newState;
+		public function fetchIncludableElements(){
+			return array(
+				$this->get('element_name') . ': value only',
+				$this->get('element_name') . ': increment'
+			);
+		}
+		
+		function toggleFieldData($data, $value){
+			$data['value'] = $value;
 			return $data;
 		}
 		
-		function appendFormattedElement(&$wrapper, $data, $encode=false){
-
+		function appendFormattedElement(&$wrapper, $data, $encode=FALSE, $mode=NULL, $entry_id=NULL){
 			if(!is_array($data) || empty($data)) return;
 			
-			$value = (int) $data["value"];
+			$value = (int) $data['value'];
 			
-			if (Symphony::Engine() instanceof Frontend) {
-				$value = ++$value;				
-				$entry_id = $wrapper->getAttribute("id");
+			if($mode == NULL) $mode = 'increment';
+			
+			if (Symphony::Engine() instanceof Frontend && $mode == 'increment') {
+				$value = ++$value;
+				$entry_id = $wrapper->getAttribute('id');
 				Symphony::Database()->update(
-					array("value" => $value),
+					array('value' => $value),
 					"tbl_entries_data_{$this->_fields['id']}",
 					"entry_id={$entry_id}"
 				);
@@ -41,17 +49,20 @@
 			
 			$increment_number = new XMLElement($this->get('element_name'), $value);
 			$wrapper->appendChild($increment_number);
-
 		}
 		
 		function displayPublishPanel(&$wrapper, $data=NULL, $flagWithError=NULL, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL){
 			$value = $data['value'];		
 			$label = Widget::Label($this->get('label'));
+			
 			if($this->get('required') != 'yes') $label->appendChild(new XMLElement('i', 'Optional'));
 			$label->appendChild(Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, (strlen($value) != 0 ? $value : 0)));
 
-			if($flagWithError != NULL) $wrapper->appendChild(Widget::wrapFormElementWithError($label, $flagWithError));
-			else $wrapper->appendChild($label);
+			if($flagWithError != NULL) {
+				$wrapper->appendChild(Widget::wrapFormElementWithError($label, $flagWithError));
+			} else {
+				$wrapper->appendChild($label);
+			}
 		}
 
 	}
