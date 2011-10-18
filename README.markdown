@@ -1,11 +1,5 @@
 # Increment Number Field
 
-* Version: 1.3
-* Author: Nick Dunn
-* Build Date: 2011-04-01
-* Requirements: Symphony 2.2 and Number Field extension.
-
-
 ## Installation
 
 1. Download the [Number Field extension](http://github.com/pointybeard/numberfield) and upload the 'numberfield' folder to your Symphony 'extensions' folder.
