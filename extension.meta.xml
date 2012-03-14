@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="incrementnumberfield">
+<extension id="incrementnumberfield" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>Increment Number</name>
 	<description>Increments a number each time an entry is shown in a page. Useful for simple hit counters.</description>
 	<repo type="github">https://github.com/nickdunn/incrementnumberfield</repo>
