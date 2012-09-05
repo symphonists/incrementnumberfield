@@ -1,8 +1,16 @@
 # Increment Number Field
 
+Increments a number each time an entry is shown in a page. Useful for simple hit counters and generating sorted "most popular" lists for your content.
+
 ## Installation
 
-1. Download the [Number Field extension](http://github.com/pointybeard/numberfield) and upload the 'numberfield' folder to your Symphony 'extensions' folder.
-2. Upload the 'incrementnumberfield' folder in this archive to your Symphony 'extensions' folder.
-3. Enable it by selecting the "Field: Increment Number", choose Enable from the with-selected menu, then click Apply.
-4. You can now add the "Increment Number" field to your sections.
+1. Upload the `incrementnumberfield` folder in this archive to your Symphony `extensions` folder.
+2. Enable it by selecting "Increment Number" on the Extensions page.
+3. You can now add the "Increment Number" field to your sections.
+
+## Usage
+
+Add the field to a section. When selecting these entries via a data source choose between the two output modes:
+
+* `view` returns the current value
+* `increment` will increase the value by `1` when the data source executes

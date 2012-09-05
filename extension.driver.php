@@ -23,15 +23,6 @@
 		}
 
 		public function install(){
-			
-			if(!file_exists(EXTENSIONS . '/numberfield/fields/field.number.php')) {
-				Administration::instance()->Page->pageAlert(
-					__('Increment Number field could not be installed because the Number field needs to be installed first.'),
-					Alert::ERROR
-				);
-				return false;
-			}
-			
 			return Symphony::Database()->query("CREATE TABLE `tbl_fields_incrementnumber` (
 			  `id` int(11) unsigned NOT NULL auto_increment,
 			  `field_id` int(11) unsigned NOT NULL,
