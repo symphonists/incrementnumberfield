@@ -92,9 +92,18 @@
 			if (Symphony::Engine() instanceof Frontend && $mode == 'increment') {
 				$value = ++$value;
 				$entry_id = $wrapper->getAttribute('id');
+				
+				/* in Symphony 2.4+ the id is in the _settings array */
+				if($this->_settings['id'] > 0) {
+					$field_id = $this->_settings['id'];
+				} else {
+					/* in Symphony 2.3 and below the id is in the _fields array */
+					$field_id = $this->_fields['id'];
+				}
+
 				Symphony::Database()->update(
 					array('value' => $value),
-					"tbl_entries_data_{$this->_fields['id']}",
+					"tbl_entries_data_{$field_id}",
 					"entry_id={$entry_id}"
 				);
 			}
