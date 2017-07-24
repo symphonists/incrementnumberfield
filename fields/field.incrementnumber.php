@@ -34,7 +34,12 @@
 		}
 		
 		function canToggle(){
-			return ($this->get('developers_only') !== 'yes' || (Symphony::Engine()->Author instanceof Author && Symphony::Engine()->Author->isDeveloper()) ? true : false);
+			if (is_callable(array('Symphony', 'Author'))) {
+    				$author = Symphony::Author();
+			} else {
+    				$author = Administration::instance()->Author;
+			}
+			return ($this->get('developers_only') !== 'yes' || ($author instanceof Author && $author->isDeveloper()) ? true : false);
 		}
 		
 		public function createTable() {
@@ -92,9 +97,18 @@
 			if (Symphony::Engine() instanceof Frontend && $mode == 'increment') {
 				$value = ++$value;
 				$entry_id = $wrapper->getAttribute('id');
+				
+				/* in Symphony 2.4+ the id is in the _settings array */
+				if($this->_settings['id'] > 0) {
+					$field_id = $this->_settings['id'];
+				} else {
+					/* in Symphony 2.3 and below the id is in the _fields array */
+					$field_id = $this->_fields['id'];
+				}
+
 				Symphony::Database()->update(
 					array('value' => $value),
-					"tbl_entries_data_{$this->_fields['id']}",
+					"tbl_entries_data_{$field_id}",
 					"entry_id={$entry_id}"
 				);
 			}
@@ -119,10 +133,17 @@
 		}
 
 		function displayPublishPanel(&$wrapper, $data=NULL, $flagWithError=NULL, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL){
+			
+			if (is_callable(array('Symphony', 'Author'))) {
+    				$author = Symphony::Author();
+			} else {
+    				$author = Administration::instance()->Author;
+			}
+			
 			$value = $data['value'];		
 			$label = Widget::Label($this->get('label'));
 
-			$readonly = ($this->get('developers_only') != 'yes' || (Symphony::Engine()->Author instanceof Author && Symphony::Engine()->Author->isDeveloper()) ? false : true);
+			$readonly = ($this->get('developers_only') != 'yes' || ($author instanceof Author && $author->isDeveloper()) ? false : true);
 
 			if($this->get('required') != 'yes') $label->appendChild(new XMLElement('i', 'Optional'));
 			$label->appendChild(Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, (string)(strlen($value) !== 0 ? $value : 0), 'text', ($readonly ? array('readonly' => 'readonly') : array())));
@@ -152,9 +173,15 @@
 
 		public function processRawFieldData($data, &$status, &$message=null, $simulate=false, $entry_id=null) {
 
+			if (is_callable(array('Symphony', 'Author'))) {
+    				$author = Symphony::Author();
+			} else {
+    				$author = Administration::instance()->Author;
+			}
+				
 			$status = self::__OK__;
 
-			if ($this->get('developers_only') == 'yes' && (!(Symphony::Engine()->Author instanceof Author) || !Symphony::Engine()->Author->isDeveloper())) {
+			if ($this->get('developers_only') == 'yes' && (!($author instanceof Author) || !$author->isDeveloper())) {
 				if (!empty($entry_id)) {
 					$data = Symphony::Database()->fetchVar('value', 0, "SELECT `value` FROM `tbl_entries_data_" . $this->get('id') . "` WHERE `entry_id` = '$entry_id' LIMIT 1");
 				}
