@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="incrementnumberfield" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+<extension id="incrementnumberfield" status="released" xmlns="http://getsymphony.com/schemas/extension/1.0">
 	<name>Increment Number</name>
 	<description>Increments a number each time an entry is shown in a page. Useful for simple hit counters.</description>
 	<repo type="github">https://github.com/symphonists/incrementnumberfield</repo>
-	<url type="discuss">http://symphony-cms.com/discuss/thread/545/</url>
+	<url type="discuss">https://www.getsymphony.com/discuss/thread/545/</url>
 	<types>
 		<type>Field Types</type>
 	</types>
@@ -17,6 +17,11 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.5.0" date="2017-07-24" min="2.3" max="2.x.x">
+			* Updated for Symphony 2.5+ compatibility
+			* Add Slovak translation
+			* Default value to 0
+		</release>
 		<release version="1.4" date="2012-09-05" min="2.3">
 			* Updated for Symphony 2.3 compatibility
 			* No longer requires the Number field to be installed, yay!
