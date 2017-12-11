@@ -17,6 +17,9 @@
 		</author>
 	</authors>
 	<releases>
+	  <release version="1.5.1" date="2017-11-11" min="2.3" max="2.x.x">
+			* Updated for PHP 7
+		</release>
 		<release version="1.5.0" date="2017-07-24" min="2.3" max="2.x.x">
 			* Updated for Symphony 2.5+ compatibility
 			* Add Slovak translation

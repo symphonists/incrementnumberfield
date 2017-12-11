@@ -14,7 +14,7 @@
 			Symphony::Database()->query("DROP TABLE `tbl_fields_incrementnumber`");
 		}
 
-		public function update($previousVersion){	
+		public function update($previousVersion = false){	
 			if(version_compare($previousVersion, '1.3', '<')){
 				Symphony::Database()->query("ALTER TABLE `tbl_fields_incrementnumber` 
 					ADD `developers_only` enum('yes','no') NOT NULL default 'no'");
