@@ -66,7 +66,7 @@
 			);
 		}
 		
-		function toggleFieldData($data, $value){
+		function toggleFieldData(array $data, $newState, $entry_id = NULL){
 			$data['value'] = $value;
 			return $data;
 		}
@@ -87,7 +87,7 @@
 			return Symphony::Database()->insert($fields, 'tbl_fields_' . $this->handle());
 		}
 		
-		function appendFormattedElement(&$wrapper, $data, $encode=FALSE, $mode=NULL, $entry_id=NULL){
+		function appendFormattedElement(XMLElement &$wrapper, $data, $encode = false, $mode = NULL, $entry_id = NULL){
 			if(!is_array($data) || empty($data)) return;
 			
 			$value = (int) $data['value'];
@@ -117,7 +117,7 @@
 			$wrapper->appendChild($increment_number);
 		}
 
-		function displaySettingsPanel(&$wrapper, $errors=NULL) {
+		function displaySettingsPanel(XMLElement &$wrapper, $errors = NULL) {
 			parent::displaySettingsPanel($wrapper, $errors);
 			
 			$div = new XMLElement('div', NULL, array('class' => 'compact'));
@@ -132,7 +132,7 @@
 			$wrapper->appendChild($div);
 		}
 
-		function displayPublishPanel(&$wrapper, $data=NULL, $flagWithError=NULL, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL){
+		function displayPublishPanel(XMLElement &$wrapper, $data = NULL, $flagWithError = NULL, $fieldnamePrefix = NULL, $fieldnamePostfix = NULL, $entry_id = NULL){
 			
 			if (is_callable(array('Symphony', 'Author'))) {
     				$author = Symphony::Author();
