@@ -66,7 +66,7 @@
 			);
 		}
 		
-		function toggleFieldData(array $data, $newState, $entry_id = NULL){
+		function toggleFieldData(array $data, $newState, $entry_id = null){
 			$data['value'] = $value;
 			return $data;
 		}
@@ -87,12 +87,12 @@
 			return Symphony::Database()->insert($fields, 'tbl_fields_' . $this->handle());
 		}
 		
-		function appendFormattedElement(XMLElement &$wrapper, $data, $encode = false, $mode = NULL, $entry_id = NULL){
+		function appendFormattedElement(XMLElement &$wrapper, $data, $encode = false, $mode = null, $entry_id = null){
 			if(!is_array($data) || empty($data)) return;
 			
 			$value = (int) $data['value'];
 			
-			if($mode == NULL) $mode = 'increment';
+			if($mode == null) $mode = 'increment';
 			
 			if (Symphony::Engine() instanceof Frontend && $mode == 'increment') {
 				$value = ++$value;
@@ -117,10 +117,10 @@
 			$wrapper->appendChild($increment_number);
 		}
 
-		function displaySettingsPanel(XMLElement &$wrapper, $errors = NULL) {
+		function displaySettingsPanel(XMLElement &$wrapper, $errors = null) {
 			parent::displaySettingsPanel($wrapper, $errors);
 			
-			$div = new XMLElement('div', NULL, array('class' => 'compact'));
+			$div = new XMLElement('div', null, array('class' => 'compact'));
 			$label = Widget::Label();
 			$input = Widget::Input( 'fields['.$this->get('sortorder').'][developers_only]', 'yes', 'checkbox');
 			if ($this->get('developers_only') == 'yes') $input->setAttribute('checked', 'checked');
@@ -132,7 +132,7 @@
 			$wrapper->appendChild($div);
 		}
 
-		function displayPublishPanel(XMLElement &$wrapper, $data = NULL, $flagWithError = NULL, $fieldnamePrefix = NULL, $fieldnamePostfix = NULL, $entry_id = NULL){
+		function displayPublishPanel(XMLElement &$wrapper, $data = null, $flagWithError = null, $fieldnamePrefix = null, $fieldnamePostfix = null, $entry_id = null){
 			
 			if (is_callable(array('Symphony', 'Author'))) {
     				$author = Symphony::Author();
@@ -148,7 +148,7 @@
 			if($this->get('required') != 'yes') $label->appendChild(new XMLElement('i', 'Optional'));
 			$label->appendChild(Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, (string)(strlen($value) !== 0 ? $value : 0), 'text', ($readonly ? array('readonly' => 'readonly') : array())));
 
-			if($flagWithError != NULL) {
+			if($flagWithError != null) {
 				$wrapper->appendChild(Widget::wrapFormElementWithError($label, $flagWithError));
 			} else {
 				$wrapper->appendChild($label);
@@ -156,7 +156,7 @@
 		}
 		
 		public function checkPostFieldData($data, &$message, $entry_id = null) {
-			$message = NULL;
+			$message = null;
 
 			if($this->get('required') == 'yes' && strlen($data) == 0) {
 				$message = __('This is a required field.');
