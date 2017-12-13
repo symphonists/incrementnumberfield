@@ -17,6 +17,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.5.2" date="2017-11-12" min="2.3" max="2.x.x">
+			* PHP code style `NULL` -> `null`
+		</release>
 		<release version="1.5.1" date="2017-11-11" min="2.3" max="2.x.x">
 			* Updated for PHP 7
 		</release>
